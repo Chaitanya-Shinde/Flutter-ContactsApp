@@ -136,9 +136,17 @@ class _NewContactViewState extends State<NewContactView> {
           ),
           TextButton(
               onPressed: () {
-                final contact = Contact(name: textController.text);
-                ContactBook().addContact(contact: contact);
-                Navigator.of(context).pop();
+                if (textController.text.trim().isEmpty == false) {
+                  final contact = Contact(name: textController.text);
+                  ContactBook().addContact(contact: contact);
+                  Navigator.of(context).pop();
+                } else {
+                  debugPrint("empty");
+                  const snackBar = SnackBar(
+                    content: Text('Please enter something!'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               },
               child: const Text('Add Contact')),
         ],
